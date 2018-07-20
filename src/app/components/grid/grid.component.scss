@@ -1,0 +1,42 @@
+#config {
+    display: grid;
+    grid-auto-flow: column;
+    grid-gap: 2em;
+    justify-content: center;
+    align-items: center;
+}
+
+.header { color: #fff; }
+
+#x-axis {
+    display: grid;
+    grid-auto-flow: column;
+
+    #gap {
+        background-color: #ccc;
+    }
+
+    .header {
+        background-color: #605594;
+    }
+}
+
+#y-axis {
+    .header {
+        background-color: #666666;
+    }
+}
+
+#y-axis > div {
+    display: grid;
+    grid-auto-flow: column;
+}
+
+.block {
+    display: grid;
+    border: 1px solid #ccc;
+    border-collapse: collapse;
+    justify-content: center;
+    align-content: center;
+    font-size: 1.5em;
+}
