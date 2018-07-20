@@ -74,6 +74,12 @@ export class GridComponent {
 
   noGood(row: number, col: number): boolean {
     return (this.operation === '-' && !this.includeNegative && col - row < 0) ||
-      (this.operation === '/' && col / row !== Math.round(col / row));
+      (
+        this.operation === '/' &&
+        (
+          row === 0 || col === 0 ||
+          col / row !== Math.round(col / row)
+        )
+      );
   }
 }
