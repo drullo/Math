@@ -1,30 +1,47 @@
-<div id="config" *ngIf="x.length === 0 || y.length === 0">
-  <mat-form-field>
-    <mat-select [(ngModel)]="operation" placeholder="Operation">
-      <mat-option value="+">Addition</mat-option>
-      <mat-option value="-">Subtraction</mat-option>
-      <mat-option value="x">Multiplication</mat-option>
-      <mat-option value="/">Division</mat-option>
-    </mat-select>
-  </mat-form-field>
+<div id="config-wrapper" *ngIf="x.length === 0 || y.length === 0">
+  <div id="config">
+    <mat-form-field>
+      <mat-select [(ngModel)]="operation" placeholder="Operation">
+        <mat-option value="+">Addition</mat-option>
+        <mat-option value="-">Subtraction</mat-option>
+        <mat-option value="x">Multiplication</mat-option>
+        <mat-option value="/">Division</mat-option>
+      </mat-select>
+    </mat-form-field>
 
-  <mat-form-field>
-    <input matInput type="number" [(ngModel)]="minX" [max]="maxX - 1" [min]="0" placeholder="Minimum X value">
-  </mat-form-field>
+    <div>
+      <div>Columns</div>
+      <div>
+        <mat-form-field>
+          <input matInput type="number" [(ngModel)]="minX" [max]="maxX" [min]="0" placeholder="Min">
+        </mat-form-field>
+        -
+        <mat-form-field>
+          <input matInput type="number" [(ngModel)]="maxX" [min]="minX" placeholder="Max">
+        </mat-form-field>
+      </div>
+    </div>
+    
+    <div>
+      <div>Rows</div>
+      <div>
+        <mat-form-field>
+          <input matInput type="number" [(ngModel)]="minY" [max]="maxY"  [min]="0" placeholder="Min">
+        </mat-form-field>
+        -
+        <mat-form-field>
+          <input matInput type="number" [(ngModel)]="maxY" [min]="minY" placeholder="Max">
+        </mat-form-field>
+      </div>
+    </div>
 
-  <mat-form-field>
-    <input matInput type="number" [(ngModel)]="maxX" [min]="minX + 1" placeholder="Maximum X value">
-  </mat-form-field>
+    <div id="options">
+      <mat-checkbox [(ngModel)]="answerFields">Answer Fields</mat-checkbox>
+      <mat-checkbox *ngIf="operation === '-'" [(ngModel)]="includeNegative">Negative Answers</mat-checkbox>
+    </div>
 
-  <mat-form-field>
-    <input matInput type="number" [(ngModel)]="minY" [max]="maxY - 1"  [min]="0" placeholder="Minimum Y value">
-  </mat-form-field>
-
-  <mat-form-field>
-    <input matInput type="number" [(ngModel)]="maxY" [min]="minY + 1" placeholder="Maximum Y value">
-  </mat-form-field>
-
-  <button mat-raised-button color="primary" (click)="populateGrid()">Generate Grid</button>
+    <button mat-raised-button color="primary" (click)="populateGrid()">Generate Grid</button>
+  </div>
 </div>
 
 <div id="grid" *ngIf="x.length > 0 && y.length > 0">
@@ -40,8 +57,22 @@
 
   <div id="y-axis">
     <div *ngFor="let row of y">
-      <div class="block header" [style.width]="blockWidth" [style.height]="blockHeight">{{ row }}</div>
-      <div class="block" [style.width]="blockWidth" [style.height]="blockHeight" *ngFor="let col of x"></div>
+      <div class="block header"
+        [style.width]="blockWidth"
+        [style.height]="blockHeight">
+        {{ row }}
+      </div>
+      
+      <div class="block" *ngFor="let col of x"
+        [style.width]="blockWidth"
+        [style.height]="blockHeight"
+        [class.correct]="answerFields && answer.value && checkAnswer(row, col, answer.value)"
+        [class.incorrect]="answerFields && answer.value && !checkAnswer(row, col, answer.value)"
+        [class.no-good]="noGood(row, col)">
+          <input #answer matInput type="number"
+            [class.hidden]="!answerFields || noGood(row, col)"
+            [placeholder]="col + ' ' + operation + ' ' + row">
+      </div>
     </div>
   </div>
 </div>
