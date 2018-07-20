@@ -37,7 +37,7 @@
 
     <div id="options">
       <mat-checkbox [(ngModel)]="answerFields">Answer Fields</mat-checkbox>
-      <mat-checkbox *ngIf="operation === '-'" [(ngModel)]="includeNegative">Negative Answers</mat-checkbox>
+      <mat-checkbox *ngIf="answerFields && operation === '-'" [(ngModel)]="includeNegative">Negative Answers</mat-checkbox>
     </div>
 
     <button mat-raised-button color="primary" (click)="populateGrid()">Generate Grid</button>
