@@ -1,0 +1,27 @@
+#menu {
+    display: grid;
+    justify-content: center;
+    align-content: center;
+    grid-gap: 2em;
+    height: 100vh;
+}
+
+#greeting, #logout {
+    text-align: center;
+    width: 100%;
+}
+
+#greeting {
+    font-weight: bold;
+    font-size: 1.5em;
+}
+
+#logout {
+    cursor: pointer;
+    font-size: .8em;
+    color: #7f7fd6;
+}
+
+#logout:hover {
+    color: orange;
+}

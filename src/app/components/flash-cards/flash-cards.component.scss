@@ -1,0 +1,40 @@
+#wrapper {
+    display: grid;
+    justify-content: center;
+    align-content: center;
+    height: 100vh;
+    width: 100vw;
+
+    #flash-card {
+        display: grid;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        background-color: #f0f8ff;
+        overflow-y: auto;
+    
+        #body { 
+            display: grid;
+            padding: 1em;
+            justify-items: center;
+        }
+    
+        #heading {
+            background: #65a1d6;
+            padding: .25em;
+            text-align: center;
+            color: #fff;
+        }
+    
+        td {
+            font-size: 3em;
+            text-align: right;
+        }
+    
+        mat-form-field {
+            margin: 1em;
+            font-size: 1.5em;
+            width: 75%;
+            text-align: center;
+        }
+    }
+}

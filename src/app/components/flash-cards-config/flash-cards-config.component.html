@@ -1,0 +1,58 @@
+<div id="wrapper">
+  <div id="config">
+    <!-- Operation -->
+    <mat-form-field>
+      <mat-select [(ngModel)]="config.operations" placeholder="Operations" multiple (selectionChange)="operationsChanged()" required>
+        <mat-option value="+">Addition</mat-option>
+        <mat-option value="-">Subtraction</mat-option>
+        
+        <mat-option value="x">Multiplication</mat-option>
+        <mat-option value="/">Division</mat-option>
+
+        <mat-option value="²">Squares</mat-option>
+        <mat-option value="³">Cubes</mat-option>
+        <!--<mat-option value="ⁿ">Powers ⁿ</mat-option>-->
+
+        <!--<mat-option value="√">Square Roots</mat-option>
+        <mat-option value="³√">Cube Roots</mat-option>-->
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field>
+      <input matInput type="number" [(ngModel)]="config.numOfQuestions" [min]="config.operations.length" max="100" placeholder="Number of Questions" required>
+    </mat-form-field>
+
+    <!-- Range -->
+    <div>
+      <div>Range</div>
+      <div>
+        <mat-form-field>
+          <input matInput type="number" [(ngModel)]="config.min" [max]="config.max" [min]="0" placeholder="Min" required>
+        </mat-form-field>
+        -
+        <mat-form-field>
+          <input matInput type="number" [(ngModel)]="config.max" [min]="config.min" placeholder="Max" required>
+        </mat-form-field>
+      </div>
+    </div>
+
+    <!-- Negative number option for subtraction -->
+    <mat-checkbox *ngIf="config.operations.indexOf('-') !== -1" [(ngModel)]="config.includeNegative">Include negative subtraction answers</mat-checkbox>
+
+    <mat-checkbox [(ngModel)]="config.autoAdvance">Auto-advance on correct answer</mat-checkbox>
+
+    <mat-checkbox [(ngModel)]="config.toastMessages">Popup answer scores</mat-checkbox>
+
+    <!-- Orientation -->
+    <mat-radio-group *ngIf="config.operations.indexOf('+') !== -1 || config.operations.indexOf('-') !== -1 || config.operations.indexOf('x') !== -1">
+      <mat-radio-button value="horizonal">Horizonal</mat-radio-button>
+      <mat-radio-button value="vertical">Vertical</mat-radio-button>
+      <mat-radio-button value="random">Random</mat-radio-button>
+    </mat-radio-group>
+
+    <div id="buttons">
+      <button mat-raised-button color="primary" (click)="menu()">Main Menu</button>
+      <button mat-raised-button color="primary" (click)="start()" [disabled]="config.operations.length === 0">Start</button>
+    </div>
+  </div>
+</div>

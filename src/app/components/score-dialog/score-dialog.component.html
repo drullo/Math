@@ -1,0 +1,31 @@
+<h2 mat-dialog-title>
+  <ngx-emoji *ngIf="letterGrade === 'A+'" emoji='heart_eyes' set='emojione' size="24"></ngx-emoji>
+  <ngx-emoji *ngIf="letterGrade === 'A'" emoji='star-struck' set='emojione' size="24"></ngx-emoji>
+  <ngx-emoji *ngIf="letterGrade === 'B'" emoji='smiley' set='emojione' size="24"></ngx-emoji>
+  <ngx-emoji *ngIf="letterGrade === 'C'" emoji='neutral_face' set='emojione' size="24"></ngx-emoji>
+  <ngx-emoji *ngIf="letterGrade === 'D'" emoji='cry' set='emojione' size="24"></ngx-emoji>
+  <ngx-emoji *ngIf="letterGrade === 'F'" emoji='sob' set='emojione' size="24"></ngx-emoji>
+
+  Your grade is {{ letterGrade }} ({{ percentageGrade }}%)
+
+  <ngx-emoji *ngIf="letterGrade === 'A+' || letterGrade === 'A'" emoji='thumbsup' set='emojione' size="24"></ngx-emoji>
+  <ngx-emoji *ngIf="letterGrade === 'B'" emoji='clap' set='emojione' size="24"></ngx-emoji>
+  <ngx-emoji *ngIf="letterGrade === 'C'" emoji='ok_hand' set='emojione' size="24"></ngx-emoji>
+  <ngx-emoji *ngIf="letterGrade === 'D' || letterGrade === 'F'" emoji='thumbsdown' set='emojione' size="24"></ngx-emoji>
+</h2>
+
+<mat-dialog-content [class.both]="correctCount > 0 && incorrectCount > 0">
+  <div id="correct" *ngIf="correctCount > 0" [class.with-incorrect]="incorrectCount > 0">
+    <div>Correct</div>
+    {{ correctCount }}
+  </div>
+
+  <div id="incorrect" *ngIf="incorrectCount > 0" [class.with-correct]="correctCount > 0">
+    <div>Incorrect</div>
+    {{ incorrectCount }}
+  </div>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <button mat-raised-button mat-dialog-close color="primary">OK</button>
+</mat-dialog-actions>

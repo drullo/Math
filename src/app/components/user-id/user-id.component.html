@@ -1,0 +1,14 @@
+<div id="wrapper">
+  <mat-form-field *ngIf="users.length">
+    <mat-select required [(ngModel)]="selectedUser">
+      <mat-option [value]="user" *ngFor="let user of users">{{ user.name }}</mat-option>
+      <mat-option [value]="newUser">New User</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field *ngIf="!users.length || isNewUser">
+    <input matInput placeholder="Who Are You?" [(ngModel)]="selectedUser.name">
+  </mat-form-field>
+
+  <button *ngIf="selectedUser.name" mat-raised-button color="primary" (click)="begin()">Begin</button>
+</div>

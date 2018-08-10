@@ -1,0 +1,61 @@
+h2, mat-dialog-actions {
+    width: 100%;
+    display: grid;
+    justify-content: center;
+}
+
+h2 {
+    grid-template-columns: auto 1fr auto;
+    justify-items: center;
+}
+
+mat-dialog-content {
+    display: grid;
+    justify-content: center;
+    font-size: 2em;
+    line-height: 1;
+}
+
+mat-dialog-content.both {
+    grid-template-columns: 1fr 1fr;
+}
+
+div {
+    padding: .5em .25em;
+    min-width: 3em;
+    text-align: center;
+}
+
+#correct {
+    border: 1px solid green;
+    /*border-left: 1px solid green;
+    border-right: 1px solid green;*/
+    color: green;
+    background-color: #aef0ae;
+    /*border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;*/
+    border-radius: 5px;
+}
+
+#correct.with-incorrect {
+    border-top-right-radius: unset;
+    border-bottom-right-radius: unset;
+    border-right: none;
+}
+
+#incorrect {
+    border: 1px solid red;
+    /*border-left: 1px solid red;
+    border-right: 1px solid red;*/
+    color: red;
+    background-color: #eca8a8;
+    /*border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;*/
+    border-radius: 5px;
+}
+
+#incorrect.with-correct {
+    border-top-left-radius: unset;
+    border-bottom-left-radius: unset;
+    border-left: none;
+}

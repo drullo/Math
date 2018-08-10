@@ -1,0 +1,47 @@
+<div id="wrapper">
+  <div id="flash-card" *ngIf="currentQuestion > -1">
+    <div id="heading">
+      Card {{ currentQuestion + 1 }} of {{ configService.questions.length }}
+    </div>
+
+    <div id="body">
+      <table>
+        <tr *ngFor="let operand of configService.questions[currentQuestion].operands; let i = index">
+          <td>
+            <span *ngIf="configService.questions[currentQuestion].operation !== '²' &&
+            configService.questions[currentQuestion].operation !== '³' &&
+              i > 0">
+              {{ configService.questions[currentQuestion].operation }}
+            </span>
+
+            {{ operand }}
+
+            <span *ngIf="configService.questions[currentQuestion].operation === '²' ||
+            configService.questions[currentQuestion].operation === '³'">
+              {{ configService.questions[currentQuestion].operation }}
+            </span>
+          </td>
+        </tr>
+      </table>
+
+      <mat-form-field>
+        <input matInput type="number" placeholder="Answer" [autofocus]="true" #answerInput
+          [(ngModel)]="configService.questions[currentQuestion].answer" (keyup)="doAutoAdvance(answerInput)">
+      </mat-form-field>
+
+      <div id="buttons">
+        <button *ngIf="currentQuestion < configService.questions.length - 1"
+          mat-raised-button color="primary"
+          (click)="nextQuestion(answerInput)">
+          Next
+        </button>
+    
+        <button *ngIf="currentQuestion === configService.questions.length - 1"
+          mat-raised-button color="primary"
+          (click)="finish()">
+          Finish
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
