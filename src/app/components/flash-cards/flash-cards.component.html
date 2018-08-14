@@ -4,6 +4,10 @@
       Card {{ currentQuestion + 1 }} of {{ configService.questions.length }}
     </div>
 
+    <div id="counter">
+      {{ secondsSinceStart }} seconds
+    </div>
+
     <div id="body">
       <table>
         <tr *ngFor="let operand of configService.questions[currentQuestion].operands; let i = index">
@@ -26,7 +30,7 @@
 
       <mat-form-field>
         <input matInput type="number" placeholder="Answer" [autofocus]="true" #answerInput
-          [(ngModel)]="configService.questions[currentQuestion].answer" (keyup)="doAutoAdvance(answerInput)">
+          [(ngModel)]="configService.questions[currentQuestion].answer" (keyup)="doAutoAdvance(answerInput, $event)">
       </mat-form-field>
 
       <div id="buttons">

@@ -1,7 +1,8 @@
 //#region Imports
-import { Component } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
+import { Subscription, timer } from 'rxjs';
 import * as moment from 'moment';
 import { ToastrService } from 'ngx-toastr';
 import { ConfigService } from '@services/config.service';
@@ -14,10 +15,12 @@ import { FlashCardConfig } from '@model/flash-card-config';
   templateUrl: './flash-cards.component.html',
   styleUrls: ['./flash-cards.component.scss']
 })
-export class FlashCardsComponent {
+export class FlashCardsComponent implements OnInit, OnDestroy {
   //#region Fields
   currentQuestion = 0; // -1;
   questionStart = moment();
+  secondsSinceStart: number;
+  secondsSinceStartSubscription: Subscription;
   //#endregion
 
   //#region Properties
@@ -51,11 +54,19 @@ export class FlashCardsComponent {
     private dialog: MatDialog,
     private router: Router,
     private toastr: ToastrService) { }
+
+  ngOnInit(): void {
+    this.calculateSecondsSinceStart();
+  }
+
+  ngOnDestroy(): void {
+    this.killSubscription();
+  }
   //#endregion
 
   //#region Events
-  doAutoAdvance(answerInput): void {
-    if (!this.config.autoAdvance) { return; }
+  doAutoAdvance(answerInput, event = null): void {
+    if (!this.config.autoAdvance && event.keyCode !== 13) { return; }
 
     if (this.scoreQuestion(false)) {
       if (this.currentQuestion < this.configService.questions.length - 1) {
@@ -76,6 +87,7 @@ export class FlashCardsComponent {
   finish(): void {
     this.toastQuestionSeconds();
     this.scoreQuestion();
+    this.killSubscription();
     this.currentQuestion = -1;
     this.dialog.open(ScoreDialogComponent, { disableClose: true })
       .afterClosed()
@@ -136,6 +148,23 @@ export class FlashCardsComponent {
     this.questionStart = moment();
 
     return correct;
+  }
+
+  private calculateSecondsSinceStart(): void {
+    if (!this.secondsSinceStartSubscription) {
+      this.secondsSinceStartSubscription = timer(0, 1000)
+        .subscribe(() => {
+          const now = moment();
+          this.secondsSinceStart = now.diff(this.questionStart, 'seconds');
+        });
+    }
+  }
+
+  private killSubscription(): void {
+    if (this.secondsSinceStartSubscription) {
+      this.secondsSinceStartSubscription.unsubscribe();
+      this.secondsSinceStartSubscription = null;
+    }
   }
   //#endregion
 }
