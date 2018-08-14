@@ -30,13 +30,13 @@
       </mat-form-field>
 
       <div id="buttons">
-        <button *ngIf="currentQuestion < configService.questions.length - 1"
+        <button *ngIf="currentQuestion < configService.questions.length - 1" [disabled]="invalidInput"
           mat-raised-button color="primary"
           (click)="nextQuestion(answerInput)">
           Next
         </button>
     
-        <button *ngIf="currentQuestion === configService.questions.length - 1"
+        <button *ngIf="currentQuestion === configService.questions.length - 1" [disabled]="invalidInput"
           mat-raised-button color="primary"
           (click)="finish()">
           Finish
