@@ -2,7 +2,8 @@
   <div id="config">
     <!-- Operation -->
     <mat-form-field>
-      <mat-select [(ngModel)]="config.operations" placeholder="Operations" multiple (selectionChange)="operationsChanged()" required>
+      <mat-select [(ngModel)]="config.operations" placeholder="Operations" multiple
+        (selectionChange)="operationsChanged()" required>
         <mat-option value="+">Addition</mat-option>
         <mat-option value="-">Subtraction</mat-option>
         

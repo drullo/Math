@@ -2,6 +2,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { User } from '@model/user';
+import { FlashCardConfig } from '@model/flash-card-config';
 //#endregion
 
 @Component({
@@ -12,7 +13,7 @@ import { User } from '@model/user';
 export class UserIdComponent implements OnInit {
   //#region Fields
   users: User[] = JSON.parse(localStorage.getItem('users'));
-  newUser: User = { name: '' };
+  newUser: User = { name: '', flashCardConfig: new FlashCardConfig() };
   selectedUser = this.lastUser;
   userName: string;
   //#endregion
