@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild, ViewChildren, QueryList } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
-import { ConfigService } from '@services/config.service';
+import { FlashCardsConfigService } from '@services/flash-cards-config.service';
 import { Question } from '@model/question';
 
 @Component({
@@ -37,7 +37,7 @@ export class ScoreDataDialogComponent implements OnInit {
     return ds;
   }
 
-  constructor(private configService: ConfigService) { }
+  constructor(private configService: FlashCardsConfigService) { }
 
   ngOnInit() {
   }

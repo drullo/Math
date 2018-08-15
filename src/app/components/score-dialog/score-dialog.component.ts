@@ -2,7 +2,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import * as moment from 'moment';
-import { ConfigService } from '@services/config.service';
+import { FlashCardsConfigService } from '@services/flash-cards-config.service';
 import { User } from '@model/user';
 import { Question } from '@model/question';
 //#endregion
@@ -60,7 +60,7 @@ export class ScoreDialogComponent implements OnInit {
   //#endregion
 
   //#region Lifecycle
-  constructor(public configService: ConfigService,
+  constructor(public configService: FlashCardsConfigService,
     public dialog: MatDialogRef<ScoreDialogComponent>,
     @Inject(MAT_DIALOG_DATA) private data: any) { }
 

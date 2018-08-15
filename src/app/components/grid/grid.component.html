@@ -1,4 +1,4 @@
-<div id="config-wrapper" *ngIf="x.length === 0 || y.length === 0">
+<!--<div id="config-wrapper" *ngIf="x.length === 0 || y.length === 0">
   <div id="config">
     <mat-form-field>
       <mat-select [(ngModel)]="operation" placeholder="Operation">
@@ -42,36 +42,36 @@
 
     <button mat-raised-button color="primary" (click)="populateGrid()">Start</button>
   </div>
-</div>
+</div>-->
 
-<div id="grid" *ngIf="x.length > 0 && y.length > 0">
+<div id="grid">
   <div id="x-axis">
     <div id="gap" class="block" [style.width]="blockWidth" [style.height]="blockHeight">
-      {{ operation }}
+      {{ config.operation }}
     </div>
 
-    <div class="block header" *ngFor="let col of x" [style.width]="blockWidth" [style.height]="blockHeight">
+    <div class="block header" *ngFor="let col of configService.columns" [style.width]="blockWidth" [style.height]="blockHeight">
       {{ col }}
     </div>
   </div>
 
   <div id="y-axis">
-    <div *ngFor="let row of y">
+    <div *ngFor="let row of configService.rows">
       <div class="block header"
         [style.width]="blockWidth"
         [style.height]="blockHeight">
         {{ row }}
       </div>
       
-      <div class="block" *ngFor="let col of x"
+      <div class="block" *ngFor="let col of configService.columns"
         [style.width]="blockWidth"
         [style.height]="blockHeight"
-        [class.correct]="answerFields && answer.value && checkAnswer(row, col, answer.value)"
-        [class.incorrect]="answerFields && answer.value && !checkAnswer(row, col, answer.value)"
+        [class.correct]="config.answerFields && answer.value && checkAnswer(row, col, answer.value)"
+        [class.incorrect]="config.answerFields && answer.value && !checkAnswer(row, col, answer.value)"
         [class.no-good]="noGood(row, col)">
           <input #answer matInput type="number"
-            [class.hidden]="!answerFields || noGood(row, col)"
-            [placeholder]="col + ' ' + operation + ' ' + row">
+            [class.hidden]="!config.answerFields || noGood(row, col)"
+            [placeholder]="col + ' ' + config.operation + ' ' + row">
       </div>
     </div>
   </div>

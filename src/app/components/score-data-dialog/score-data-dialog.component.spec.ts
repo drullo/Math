@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ScoreDataDialogComponent } from './score-data-dialog.component';
+import { ScoreDataDialogComponent } from '@components/score-data-dialog/score-data-dialog.component';
 
 describe('ScoreDataDialogComponent', () => {
   let component: ScoreDataDialogComponent;

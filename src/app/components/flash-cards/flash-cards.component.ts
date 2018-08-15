@@ -5,7 +5,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { Subscription, timer } from 'rxjs';
 import * as moment from 'moment';
 import { ToastrService } from 'ngx-toastr';
-import { ConfigService } from '@services/config.service';
+import { FlashCardsConfigService } from '@services/flash-cards-config.service';
 import { FlashCardConfig } from '@model/flash-card-config';
 import { ScoreDialogComponent } from '@components/score-dialog/score-dialog.component';
 import { ScoreDataDialogComponent } from '@components/score-data-dialog/score-data-dialog.component';
@@ -52,7 +52,7 @@ export class FlashCardsComponent implements OnInit, OnDestroy {
   //#endregion
 
   //#region Lifecycle
-  constructor(public configService: ConfigService,
+  constructor(public configService: FlashCardsConfigService,
     private dialog: MatDialog,
     private router: Router,
     private toastr: ToastrService) { }

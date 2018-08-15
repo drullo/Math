@@ -1,12 +1,12 @@
-import { User } from '@model/user';
 import { Injectable } from '@angular/core';
+import { User } from '@model/user';
 import { Question } from '@model/question';
 import { FlashCardConfig } from '@model/flash-card-config';
 
 @Injectable({
   providedIn: 'root'
 })
-export class ConfigService {
+export class FlashCardsConfigService {
   questions: Question[] = [];
 
   get questionsBySeconds(): Question[] {

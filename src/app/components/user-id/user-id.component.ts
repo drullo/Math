@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { User } from '@model/user';
 import { FlashCardConfig } from '@model/flash-card-config';
+import { GridConfig } from '@model/grid-config';
 //#endregion
 
 @Component({
@@ -13,7 +14,7 @@ import { FlashCardConfig } from '@model/flash-card-config';
 export class UserIdComponent implements OnInit {
   //#region Fields
   users: User[] = JSON.parse(localStorage.getItem('users'));
-  newUser: User = { name: '', flashCardConfig: new FlashCardConfig() };
+  newUser: User = { name: '', flashCardConfig: new FlashCardConfig(), gridConfig: new GridConfig() };
   selectedUser = this.lastUser;
   userName: string;
   //#endregion

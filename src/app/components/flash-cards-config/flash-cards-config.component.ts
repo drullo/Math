@@ -1,7 +1,7 @@
 //#region Imports
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
-import { ConfigService } from '@services/config.service';
+import { FlashCardsConfigService } from '@services/flash-cards-config.service';
 import { FlashCardConfig } from '@model/flash-card-config';
 import { Question } from '@model/question';
 import { User } from '@model/user';
@@ -20,7 +20,7 @@ export class FlashCardsConfigComponent implements OnInit {
   //#endregion
 
   //#region Lifecycle
-  constructor(public configService: ConfigService, private router: Router) { }
+  constructor(public configService: FlashCardsConfigService, private router: Router) { }
 
   ngOnInit() {
   }

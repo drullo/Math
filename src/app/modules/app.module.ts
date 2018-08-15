@@ -24,6 +24,7 @@ import { EmojiModule } from '@ctrl/ngx-emoji-mart/ngx-emoji';
 // Route guards
 import { LoggedIn } from '@routeguards/logged-in';
 import { FlashCardsConfigComplete } from '@routeguards/flash-cards-config-complete';
+import { GridConfigComplete } from '@routeguards/grid-config-complete';
 
 // Components
 import { AppComponent } from '@components/app/app.component';
@@ -33,7 +34,8 @@ import { FlashCardsConfigComponent } from '@components/flash-cards-config/flash-
 import { MenuComponent } from '@components/menu/menu.component';
 import { UserIdComponent } from '@components/user-id/user-id.component';
 import { ScoreDialogComponent } from '@components/score-dialog/score-dialog.component';
-import { ScoreDataDialogComponent } from '../components/score-data-dialog/score-data-dialog.component';
+import { ScoreDataDialogComponent } from '@components/score-data-dialog/score-data-dialog.component';
+import { GridConfigComponent } from '@components/grid-config/grid-config.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +46,8 @@ import { ScoreDataDialogComponent } from '../components/score-data-dialog/score-
     UserIdComponent,
     FlashCardsConfigComponent,
     ScoreDialogComponent,
-    ScoreDataDialogComponent
+    ScoreDataDialogComponent,
+    GridConfigComponent
   ],
   imports: [
     BrowserModule,
@@ -72,7 +75,8 @@ import { ScoreDataDialogComponent } from '../components/score-data-dialog/score-
   ],
   providers: [
     LoggedIn,
-    FlashCardsConfigComplete
+    FlashCardsConfigComplete,
+    GridConfigComplete
   ],
   entryComponents: [
     ScoreDialogComponent,

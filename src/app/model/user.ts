@@ -1,3 +1,4 @@
+import { GridConfig } from '@model/grid-config';
 import { FlashCardConfig } from '@model/flash-card-config';
 
 export interface User {
@@ -5,4 +6,5 @@ export interface User {
     lastLetterGrade?: string;
     lastPercentageGrade?: number;
     flashCardConfig?: FlashCardConfig;
+    gridConfig?: GridConfig;
 }

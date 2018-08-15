@@ -1,0 +1,48 @@
+<div id="wrapper">
+  <div id="config">
+    <mat-form-field>
+      <mat-select [(ngModel)]="config.operation" placeholder="Operation">
+        <mat-option value="+">Addition</mat-option>
+        <mat-option value="-">Subtraction</mat-option>
+        <mat-option value="x">Multiplication</mat-option>
+        <mat-option value="/">Division</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <div>
+      <div>Columns</div>
+      <div>
+        <mat-form-field>
+          <input matInput type="number" [(ngModel)]="config.columnMin" [max]="config.columnMax" [min]="0" placeholder="Min">
+        </mat-form-field>
+        -
+        <mat-form-field>
+          <input matInput type="number" [(ngModel)]="config.columnMax" [min]="config.columnMin" placeholder="Max">
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div>
+      <div>Rows</div>
+      <div>
+        <mat-form-field>
+          <input matInput type="number" [(ngModel)]="config.rowMin" [max]="config.rowMax" [min]="0" placeholder="Min">
+        </mat-form-field>
+        -
+        <mat-form-field>
+          <input matInput type="number" [(ngModel)]="config.rowMax" [min]="config.rowMin" placeholder="Max">
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div id="options">
+      <mat-checkbox [(ngModel)]="config.answerFields">Answer Fields</mat-checkbox>
+      <mat-checkbox *ngIf="config.answerFields && config.operation === '-'" [(ngModel)]="config.includeNegative">Negative Answers</mat-checkbox>
+    </div>
+
+    <div id="buttons">
+        <button mat-raised-button color="primary" (click)="menu()">Main Menu</button>
+        <button mat-raised-button color="primary" (click)="start()">Start</button>
+    </div>
+  </div>
+</div>
