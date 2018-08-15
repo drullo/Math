@@ -12,6 +12,9 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatSelectModule } from '@angular/material/select';
+import { MatSortModule } from '@angular/material/sort';
+import { MatTableModule } from '@angular/material/table';
+import { MatTabsModule } from '@angular/material/tabs';
 
 // Other modules
 import { ToastrModule } from 'ngx-toastr';
@@ -30,6 +33,7 @@ import { FlashCardsConfigComponent } from '@components/flash-cards-config/flash-
 import { MenuComponent } from '@components/menu/menu.component';
 import { UserIdComponent } from '@components/user-id/user-id.component';
 import { ScoreDialogComponent } from '@components/score-dialog/score-dialog.component';
+import { ScoreDataDialogComponent } from '../components/score-data-dialog/score-data-dialog.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +43,8 @@ import { ScoreDialogComponent } from '@components/score-dialog/score-dialog.comp
     FlashCardsComponent,
     UserIdComponent,
     FlashCardsConfigComponent,
-    ScoreDialogComponent
+    ScoreDialogComponent,
+    ScoreDataDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -54,6 +59,9 @@ import { ScoreDialogComponent } from '@components/score-dialog/score-dialog.comp
     MatInputModule,
     MatRadioModule,
     MatSelectModule,
+    MatSortModule,
+    MatTableModule,
+    MatTabsModule,
 
     EmojiModule,
 
@@ -66,7 +74,10 @@ import { ScoreDialogComponent } from '@components/score-dialog/score-dialog.comp
     LoggedIn,
     FlashCardsConfigComplete
   ],
-  entryComponents: [ ScoreDialogComponent ],
+  entryComponents: [
+    ScoreDialogComponent,
+    ScoreDataDialogComponent
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

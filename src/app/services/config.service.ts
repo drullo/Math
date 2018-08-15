@@ -9,6 +9,14 @@ import { FlashCardConfig } from '@model/flash-card-config';
 export class ConfigService {
   questions: Question[] = [];
 
+  get questionsBySeconds(): Question[] {
+    return this.questions.sort((a, b) => {
+      if (a.seconds < b.seconds) { return 1; }
+      if (a.seconds > b.seconds) { return -1; }
+      return 0;
+    });
+  }
+
   private users: User[] = JSON.parse(localStorage.getItem('users'));
   private lastUserName = localStorage.getItem('lastUserName');
 

@@ -4,6 +4,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import * as moment from 'moment';
 import { ConfigService } from '@services/config.service';
 import { User } from '@model/user';
+import { Question } from '@model/question';
 //#endregion
 
 @Component({
@@ -39,12 +40,29 @@ export class ScoreDialogComponent implements OnInit {
     const courseEnd: moment.Moment = this.data.courseEnd;
     return courseEnd.diff(courseStart, 'seconds');
   }
+
+  get correctQuestionsByTime(): Question[] {
+    return this.configService.questionsBySeconds
+      .filter(q => q.correctAnswer);
+  }
+
+  get slowestQuestion(): Question {
+    return this.correctQuestionsByTime ?
+      this.correctQuestionsByTime[0] :
+      null;
+  }
+
+  get fastestQuestion(): Question {
+    return this.correctQuestionsByTime ?
+      this.correctQuestionsByTime[this.correctQuestionsByTime.length - 1] :
+      null;
+  }
   //#endregion
 
   //#region Lifecycle
   constructor(public configService: ConfigService,
     public dialog: MatDialogRef<ScoreDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any) { }
+    @Inject(MAT_DIALOG_DATA) private data: any) { }
 
   ngOnInit() {
     this.saveResults();

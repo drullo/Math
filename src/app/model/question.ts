@@ -3,4 +3,7 @@ export interface Question {
     operands: number[];
     answer?: number;
     correctAnswer?: boolean;
+
+    description?: string;
+    seconds?: number;
 }

@@ -64,7 +64,7 @@ export class FlashCardsConfigComponent implements OnInit {
             question.operands.push(this.getRandomNum());
           } else {
             question.operands.push(this.getRandomNum(this.config.min, question.operands[0]));
-          }
+          } 
           break;
         case 'x':
           question.operands.push(this.getRandomNum());

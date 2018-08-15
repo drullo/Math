@@ -6,8 +6,9 @@ import { Subscription, timer } from 'rxjs';
 import * as moment from 'moment';
 import { ToastrService } from 'ngx-toastr';
 import { ConfigService } from '@services/config.service';
-import { ScoreDialogComponent } from '@components/score-dialog/score-dialog.component';
 import { FlashCardConfig } from '@model/flash-card-config';
+import { ScoreDialogComponent } from '@components/score-dialog/score-dialog.component';
+import { ScoreDataDialogComponent } from '@components/score-data-dialog/score-data-dialog.component';
 //#endregion
 
 @Component({
@@ -22,8 +23,6 @@ export class FlashCardsComponent implements OnInit, OnDestroy {
   questionStart = moment(); // start time of each question
   secondsSinceStart: number;
   secondsSinceStartSubscription: Subscription;
-  slowestQuestion: any;
-  fastestQuestion: any;
   //#endregion
 
   //#region Properties
@@ -96,12 +95,20 @@ export class FlashCardsComponent implements OnInit, OnDestroy {
         disableClose: true,
         data: {
           courseStart: this.courseStart,
-          courseEnd: moment(),
-          slowestQuestion: this.slowestQuestion,
-          fastestQuestion: this.fastestQuestion
+          courseEnd: moment()
         }
       }).afterClosed()
-      .subscribe(() => this.router.navigate(['/flash-config']));
+      .subscribe(result => {
+        if (result) {
+          this.dialog.open(ScoreDataDialogComponent, {
+            disableClose: true,
+            minWidth: '50vw'
+          }).afterClosed()
+            .subscribe(() => this.router.navigate(['/flash-config']));
+        } else {
+          this.router.navigate(['/flash-config']);
+        }
+      });
   }
   //#endregion
 
@@ -112,18 +119,11 @@ export class FlashCardsComponent implements OnInit, OnDestroy {
     const questionEnd = moment();
     const seconds = questionEnd.diff(this.questionStart, 'seconds');
 
+    this.configService.questions[this.currentQuestion].description = this.questionText;
+    this.configService.questions[this.currentQuestion].seconds = seconds;
+
     if (this.config.toastTimes) {
       this.toastr.info(`${seconds} seconds: ${this.questionText}`, null, { positionClass: 'toast-top-center' });
-    }
-
-    if (this.scoreQuestion(false)) {
-      if (!this.slowestQuestion || this.slowestQuestion.seconds > seconds) {
-        this.slowestQuestion = { question: this.questionText, seconds: seconds };
-      }
-
-      if (!this.fastestQuestion || this.fastestQuestion.seconds < seconds) {
-        this.fastestQuestion = { question: this.questionText, seconds: seconds };
-      }
     }
   }
 

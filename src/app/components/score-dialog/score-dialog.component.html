@@ -35,20 +35,23 @@
       <span>{{ courseSeconds }} seconds</span>
     </div>
 
-    <div *ngIf="data.slowestQuestion">
-      Slowest:
-      <span>{{ data.slowestQuestion.seconds }} seconds</span>
-      ({{ data.slowestQuestion.question }})
-    </div>
+    <div *ngIf="correctQuestionsByTime.length > 1">
+      <div *ngIf="slowestQuestion">
+        Slowest:
+        <span>{{ slowestQuestion.seconds }} seconds</span>
+        ({{ slowestQuestion.description }})
+      </div>
 
-    <div *ngIf="data.fastestQuestion">
-      Fastest:
-      <span>{{ data.fastestQuestion.seconds }} seconds</span>
-      ({{ data.fastestQuestion.question }})
+      <div *ngIf="fastestQuestion && slowestQuestion !== fastestQuestion">
+        Fastest:
+        <span>{{ fastestQuestion.seconds }} seconds</span>
+        ({{ fastestQuestion.description }})
+      </div>
     </div>
   </div>
 </mat-dialog-content>
 
 <mat-dialog-actions>
-  <button mat-raised-button mat-dialog-close color="primary">OK</button>
+  <button mat-raised-button mat-dialog-close color="primary">Close</button>
+  <button mat-raised-button [mat-dialog-close]="true" color="primary">View Details</button>
 </mat-dialog-actions>

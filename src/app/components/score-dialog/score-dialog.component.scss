@@ -4,6 +4,10 @@ h2, mat-dialog-actions {
     justify-content: center;
 }
 
+mat-dialog-actions {
+    grid-template-columns: 1fr 1fr;
+}
+
 h2 {
     grid-template-columns: auto 1fr auto;
     justify-items: center;

@@ -1,0 +1,50 @@
+<h2 mat-dialog-title>Score Details</h2>
+
+<mat-dialog-content *ngIf="sort">
+  <mat-tab-group>
+
+    <mat-tab label="Correct" *ngIf="correctAnswers.data.length > 0">
+      <table mat-table [dataSource]="correctAnswers" matSort>
+        <ng-container *ngFor="let column of displayedColumns" [matColumnDef]="column">
+          <th mat-header-cell mat-sort-header *matHeaderCellDef>
+            {{ caption(column) }}
+          </th>
+
+          <td mat-cell *matCellDef="let question">
+            <span *ngIf="column === 'operation'">{{ operation(question[column]) }}</span>
+            <span *ngIf="column !== 'operation'">{{ question[column] }}</span>
+
+            <span *ngIf="column === 'seconds'"> seconds</span>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let question; columns: displayedColumns;"></tr>
+      </table>
+    </mat-tab>
+
+    <mat-tab label="Incorrect"  *ngIf="inCorrectAnswers.data.length > 0">
+      <table mat-table [dataSource]="inCorrectAnswers" matSort>
+        <ng-container *ngFor="let column of displayedColumns" [matColumnDef]="column">
+          <th mat-header-cell mat-sort-header *matHeaderCellDef>
+            {{ caption(column) }}
+          </th>
+
+          <td mat-cell *matCellDef="let question">
+            <span *ngIf="column === 'operation'">{{ operation(question[column]) }}</span>
+            <span *ngIf="column !== 'operation'">{{ question[column] }}</span>
+
+            <span *ngIf="column === 'seconds'"> seconds</span>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let question; columns: displayedColumns;"></tr>
+      </table>
+    </mat-tab>
+  </mat-tab-group>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <button mat-raised-button mat-dialog-close color="primary">Close</button>
+</mat-dialog-actions>
