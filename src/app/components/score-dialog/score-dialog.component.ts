@@ -1,5 +1,7 @@
 //#region Imports
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import * as moment from 'moment';
 import { ConfigService } from '@services/config.service';
 import { User } from '@model/user';
 //#endregion
@@ -12,15 +14,15 @@ import { User } from '@model/user';
 export class ScoreDialogComponent implements OnInit {
   //#region Properties
   get correctCount(): number {
-    return this.config.questions.filter(q => q.correctAnswer).length;
+    return this.configService.questions.filter(q => q.correctAnswer).length;
   }
 
   get incorrectCount(): number {
-    return this.config.questions.filter(q => q.correctAnswer === false).length;
+    return this.configService.questions.filter(q => q.correctAnswer === false).length;
   }
 
   get percentageGrade(): number {
-    return Math.round((this.correctCount / this.config.questions.length) * 100);
+    return Math.round((this.correctCount / this.configService.questions.length) * 100);
   }
 
   get letterGrade(): string {
@@ -31,10 +33,18 @@ export class ScoreDialogComponent implements OnInit {
     if (this.percentageGrade >= 60) { return 'D'; }
     return 'F';
   }
+
+  get courseSeconds(): number {
+    const courseStart: moment.Moment = this.data.courseStart;
+    const courseEnd: moment.Moment = this.data.courseEnd;
+    return courseEnd.diff(courseStart, 'seconds');
+  }
   //#endregion
 
   //#region Lifecycle
-  constructor(private config: ConfigService) { }
+  constructor(public configService: ConfigService,
+    public dialog: MatDialogRef<ScoreDialogComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any) { }
 
   ngOnInit() {
     this.saveResults();

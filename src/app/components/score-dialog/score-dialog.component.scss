@@ -9,31 +9,30 @@ h2 {
     justify-items: center;
 }
 
-mat-dialog-content {
+#counts {
     display: grid;
     justify-content: center;
     font-size: 2em;
     line-height: 1;
 }
 
-mat-dialog-content.both {
+#counts.both {
     grid-template-columns: 1fr 1fr;
 }
 
-div {
+mat-dialog-content {
+    text-align: center;
+}
+
+#correct, #incorrect {
     padding: .5em .25em;
     min-width: 3em;
-    text-align: center;
 }
 
 #correct {
     border: 1px solid green;
-    /*border-left: 1px solid green;
-    border-right: 1px solid green;*/
     color: green;
     background-color: #aef0ae;
-    /*border-bottom-right-radius: 5px;
-    border-bottom-left-radius: 5px;*/
     border-radius: 5px;
 }
 
@@ -45,12 +44,8 @@ div {
 
 #incorrect {
     border: 1px solid red;
-    /*border-left: 1px solid red;
-    border-right: 1px solid red;*/
     color: red;
     background-color: #eca8a8;
-    /*border-bottom-right-radius: 5px;
-    border-bottom-left-radius: 5px;*/
     border-radius: 5px;
 }
 
@@ -58,4 +53,16 @@ div {
     border-top-left-radius: unset;
     border-bottom-left-radius: unset;
     border-left: none;
+}
+
+#time-info {
+    margin-top: 1em;
+}
+
+#time-info > div:first-child {
+    margin-bottom: 1em;
+}
+
+#time-info span {
+    font-weight: bold;
 }

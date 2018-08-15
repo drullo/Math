@@ -44,12 +44,18 @@
 
     <mat-checkbox [(ngModel)]="config.toastMessages">Popup answer scores</mat-checkbox>
 
+    <div id="timer-options">
+      <mat-checkbox [(ngModel)]="config.toastTimes">Popup answer times</mat-checkbox>
+      <mat-checkbox [(ngModel)]="config.cardTimer">Timer on cards</mat-checkbox>
+    </div>
+
     <!-- Orientation -->
-    <mat-radio-group *ngIf="config.operations.indexOf('+') !== -1 || config.operations.indexOf('-') !== -1 || config.operations.indexOf('x') !== -1">
+    <!-- Not yet implemented
+      <mat-radio-group *ngIf="config.operations.indexOf('+') !== -1 || config.operations.indexOf('-') !== -1 || config.operations.indexOf('x') !== -1">
       <mat-radio-button value="horizonal">Horizonal</mat-radio-button>
       <mat-radio-button value="vertical">Vertical</mat-radio-button>
       <mat-radio-button value="random">Random</mat-radio-button>
-    </mat-radio-group>
+    </mat-radio-group>-->
 
     <div id="buttons">
       <button mat-raised-button color="primary" (click)="menu()">Main Menu</button>

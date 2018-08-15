@@ -4,7 +4,7 @@
       Card {{ currentQuestion + 1 }} of {{ configService.questions.length }}
     </div>
 
-    <div id="counter">
+    <div id="counter" *ngIf="config.cardTimer">
       {{ secondsSinceStart }} seconds
     </div>
 

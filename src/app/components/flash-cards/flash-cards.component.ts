@@ -18,9 +18,12 @@ import { FlashCardConfig } from '@model/flash-card-config';
 export class FlashCardsComponent implements OnInit, OnDestroy {
   //#region Fields
   currentQuestion = 0; // -1;
-  questionStart = moment();
+  courseStart = moment(); // overall start time
+  questionStart = moment(); // start time of each question
   secondsSinceStart: number;
   secondsSinceStartSubscription: Subscription;
+  slowestQuestion: any;
+  fastestQuestion: any;
   //#endregion
 
   //#region Properties
@@ -89,17 +92,39 @@ export class FlashCardsComponent implements OnInit, OnDestroy {
     this.scoreQuestion();
     this.killSubscription();
     this.currentQuestion = -1;
-    this.dialog.open(ScoreDialogComponent, { disableClose: true })
-      .afterClosed()
+    this.dialog.open(ScoreDialogComponent, {
+        disableClose: true,
+        data: {
+          courseStart: this.courseStart,
+          courseEnd: moment(),
+          slowestQuestion: this.slowestQuestion,
+          fastestQuestion: this.fastestQuestion
+        }
+      }).afterClosed()
       .subscribe(() => this.router.navigate(['/flash-config']));
   }
   //#endregion
 
   //#region Utilities
   private toastQuestionSeconds(): void {
+    // if (!this.config.toastTimes) { return; }
+
     const questionEnd = moment();
     const seconds = questionEnd.diff(this.questionStart, 'seconds');
-    this.toastr.info(`${seconds} seconds: ${this.questionText}`, null, { positionClass: 'toast-top-center' });
+
+    if (this.config.toastTimes) {
+      this.toastr.info(`${seconds} seconds: ${this.questionText}`, null, { positionClass: 'toast-top-center' });
+    }
+
+    if (this.scoreQuestion(false)) {
+      if (!this.slowestQuestion || this.slowestQuestion.seconds > seconds) {
+        this.slowestQuestion = { question: this.questionText, seconds: seconds };
+      }
+
+      if (!this.fastestQuestion || this.fastestQuestion.seconds < seconds) {
+        this.fastestQuestion = { question: this.questionText, seconds: seconds };
+      }
+    }
   }
 
   private scoreQuestion(recordScore = true): boolean {

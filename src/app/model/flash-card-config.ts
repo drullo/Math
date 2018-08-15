@@ -6,4 +6,6 @@ export class FlashCardConfig {
     includeNegative = true;
     autoAdvance = false;
     toastMessages = true;
+    toastTimes = true;
+    cardTimer = true;
 }

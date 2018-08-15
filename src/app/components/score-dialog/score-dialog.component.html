@@ -14,15 +14,38 @@
   <ngx-emoji *ngIf="letterGrade === 'D' || letterGrade === 'F'" emoji='thumbsdown' set='emojione' size="24"></ngx-emoji>
 </h2>
 
-<mat-dialog-content [class.both]="correctCount > 0 && incorrectCount > 0">
-  <div id="correct" *ngIf="correctCount > 0" [class.with-incorrect]="incorrectCount > 0">
-    <div>Correct</div>
-    {{ correctCount }}
+<mat-dialog-content>
+  <div id="counts" [class.both]="correctCount > 0 && incorrectCount > 0">
+    <div id="correct" *ngIf="correctCount > 0" [class.with-incorrect]="incorrectCount > 0">
+      <div>Correct</div>
+      {{ correctCount }}
+    </div>
+
+    <div id="incorrect" *ngIf="incorrectCount > 0" [class.with-correct]="correctCount > 0">
+      <div>Incorrect</div>
+      {{ incorrectCount }}
+    </div>
   </div>
 
-  <div id="incorrect" *ngIf="incorrectCount > 0" [class.with-correct]="correctCount > 0">
-    <div>Incorrect</div>
-    {{ incorrectCount }}
+  <div id="time-info">
+    <div>
+      You answered
+      {{ configService.questions.length }} questions
+      in
+      <span>{{ courseSeconds }} seconds</span>
+    </div>
+
+    <div *ngIf="data.slowestQuestion">
+      Slowest:
+      <span>{{ data.slowestQuestion.seconds }} seconds</span>
+      ({{ data.slowestQuestion.question }})
+    </div>
+
+    <div *ngIf="data.fastestQuestion">
+      Fastest:
+      <span>{{ data.fastestQuestion.seconds }} seconds</span>
+      ({{ data.fastestQuestion.question }})
+    </div>
   </div>
 </mat-dialog-content>
 

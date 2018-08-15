@@ -42,4 +42,9 @@
         justify-content: end;
         justify-self: end;
     }
+
+    #timer-options {
+        display: flex;
+        justify-content: space-between;
+    }
 }
