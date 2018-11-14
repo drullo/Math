@@ -36,7 +36,7 @@
     </div>
 
     <div id="options">
-      <mat-checkbox [(ngModel)]="config.answerFields">Answer Fields</mat-checkbox>
+      <mat-checkbox [(ngModel)]="config.answerFields">Show Questions</mat-checkbox>
       <mat-checkbox *ngIf="config.answerFields && config.operation === '-'" [(ngModel)]="config.includeNegative">Negative Answers</mat-checkbox>
     </div>
 

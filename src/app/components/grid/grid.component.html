@@ -66,13 +66,15 @@
       <div class="block" *ngFor="let col of configService.columns"
         [style.width]="blockWidth"
         [style.height]="blockHeight"
-        [class.correct]="config.answerFields && answer.value && checkAnswer(row, col, answer.value)"
-        [class.incorrect]="config.answerFields && answer.value && !checkAnswer(row, col, answer.value)"
+        [class.correct]="answer.value && checkAnswer(row, col, answer.value)"
+        [class.incorrect]="answer.value && !checkAnswer(row, col, answer.value)"
         [class.no-good]="noGood(row, col)">
           <input #answer matInput type="number"
-            [class.hidden]="!config.answerFields || noGood(row, col)"
-            [placeholder]="col + ' ' + config.operation + ' ' + row">
-      </div>
+            [class.hidden]="noGood(row, col)"
+            [placeholder]="config.answerFields ?
+              col + ' ' + config.operation + ' ' + row :
+              null">
+      </div><!--[class.hidden]="!config.answerFields || noGood(row, col)"-->
     </div>
   </div>
 </div>
